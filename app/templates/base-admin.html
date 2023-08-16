@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+        {% if title %}
+            <title>{{ title }} - Catequesis Veracruz</title>
+        {% else %}
+            <title>Catequesis Veracruz</title>
+        {% endif %}
+        <style>
+            @media only screen and (max-width: 1023px) {
+                .g-recaptcha {
+                    transform:scale(1.5);
+                    -webkit-transform:scale(1.5);
+                    transform-origin:0 0;
+                    -webkit-transform-origin:0 0;
+                }
+            }
+        </style>
+        <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    </head>
+    <body class="has-navbar-fixed-top">
+        <nav class="navbar is-fixed-top is-info" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="{{ url_for('index') }}">
+                  <img src="{{ url_for('static', filename='didic_logo.jpg') }}" width="28" height="28">
+                </a>
+                <a href="{{ url_for('index') }}" class="navbar-item is-size-4-touch">
+                    Escuela Diocesana de Catequesis Veracruz
+                </a>
+                {% if current_user.is_authenticated %}
+                    <div class="buttons">
+                        <a class="button is-primary ml-6" href="{{ url_for('logout') }}">
+                        <strong>Salir</strong>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            
+        </nav>            
+        
+       
+        {% block content %}{% endblock %}
+    </body>
+</html>

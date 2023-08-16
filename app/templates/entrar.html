@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+<div class="container is-fluid">
+    <div class="columns is-desktop is-centered">
+        <div class="column"></div>
+        <div class="column">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="mt-4">
+                    {% for message in messages %}
+                    <li class="notification is-danger has-text-centered">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            {% endwith %}
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="field mt-4">
+                    <label class="label is-size-3-touch">{{ form.apellido_p.label }}</label>
+                    <div class="control">
+                        {{ form.apellido_p(size=50)}}
+                    </div>
+                    {% for error in form.apellido_p.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %} 
+                </div>
+                <div class="field mb-5">
+                    <label class="label is-size-3-touch">{{ form.apellido_m.label }}</label>
+                    <div class="control">
+                        {{ form.apellido_m(size=50)}}
+                    </div>
+                    {% for error in form.apellido_m.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %} 
+                </div>
+                <p class="title is-4 is-size-2-touch has-text-centered is-underlined">Fecha de Nacimiento</p>
+                <div class="columns is-mobile">
+                    <div class="field column has-text-centered">
+                        <label class="label is-size-3-touch">{{ form.dia_nac.label }}</label>
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth is-large">
+                                {{ form.dia_nac()}}
+                            </div>
+                        </div>
+                        
+                        {% for error in form.dia_nac.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="field column has-text-centered">
+                        <label class="label is-size-3-touch">{{ form.mes_nac.label }}</label>
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth is-large">
+                                {{ form.mes_nac()}}
+                            </div>
+                        </div>
+                        
+                        {% for error in form.mes_nac.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="field column has-text-centered">
+                        <label class="label is-size-3-touch">{{ form.año_nac.label }}</label>
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth is-large">
+                                {{ form.año_nac()}}
+                            </div>
+                        </div>
+                        
+                        {% for error in form.año_nac.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="columns is-mobile">
+                    <div class="control column">
+                        {{ form.submit() }}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="column"></div>
+    </div>
+</div>
+{% endblock %}

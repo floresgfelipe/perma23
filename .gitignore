@@ -1,0 +1,6 @@
+Pipfile.lock
+.env
+u
+.flaskenv
+excel/
+instance/

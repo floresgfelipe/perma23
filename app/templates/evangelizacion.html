@@ -1,0 +1,275 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mx-4 mt-2 container has-text-centered">
+    <div class="container mb-4">
+        <div class="notification is-link has-text-centered is-size-4 is-size-2-touch">
+            <p>Inscripción para el Curso de Evangelización</p>
+        </div>
+    </div>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="columns is-desktop">
+            <div class="field column">
+                <label class="label is-size-3-touch">{{ form.nombres.label }}</label>
+                <div class="control">
+                    {{ form.nombres(size=50)}}
+                </div>
+
+                {% for error in form.nombres.errors %}
+                    <p class="help is-size-4-touch is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="field column">
+                <label class="label is-size-3-touch">{{ form.apellido_p.label }}</label>
+                <div class="control">
+                    {{ form.apellido_p(size=50)}}
+                </div>
+                
+                {% for error in form.apellido_p.errors %}
+                    <p class="help is-size-4-touch is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="field column">
+                <label class="label is-size-3-touch">{{ form.apellido_m.label }}</label>
+                <div class="control">
+                    {{ form.apellido_m(size=50)}}
+                </div>
+                
+                {% for error in form.apellido_m.errors %}
+                    <p class="help is-size-4-touch is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+       
+        <p class="title is-4 is-size-2-touch has-text-centered is-underlined">Fecha de Nacimiento</p>
+        
+        
+        <div class="columns is-mobile">
+            <div class="column"></div>
+            <div class="field column">
+                <label class="label is-size-3-touch">{{ form.dia_nac.label }}</label>
+                <div class="control is-expanded">
+                    <div class="select is-large is-fullwidth">
+                        {{ form.dia_nac()}}
+                    </div>   
+                </div>
+                
+                {% for error in form.dia_nac.errors %}
+                    <p class="help is-size-4-touch is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="field column">
+                <label class="label is-size-3-touch">{{ form.mes_nac.label }}</label>
+                <div class="control is-expanded">
+                    <div class="select is-large is-fullwidth">
+                        {{ form.mes_nac()}}
+                    </div>
+                </div>
+                
+                {% for error in form.mes_nac.errors %}
+                    <p class="help is-size-4-touch is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="field column">
+                <label class="label is-size-3-touch">{{ form.año_nac.label }}</label>
+                <div class="control is-expanded">
+                    <div class="select is-large is-fullwidth">
+                        {{ form.año_nac()}}
+                    </div>
+                </div>
+                
+                {% for error in form.año_nac.errors %}
+                    <p class="help is-size-4-touch is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+        
+            <div class="column"></div>
+        </div>
+        <div class="columns is-desktop">
+            <div class="field column">
+                <label class="label is-size-3-touch">{{ form.decanato.label }}</label>
+                <div class="control is-expanded">
+                    <div class="select is-large is-fullwidth">
+                        {{ form.decanato()}}
+                    </div>
+                </div>
+                
+                {% for error in form.decanato.errors %}
+                    <p class="help is-size-4-touch is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="field column">
+                <label class="label is-size-3-touch">{{ form.parroquia.label }}</label>
+                <div class="control is-expanded">
+                    <div class="select is-large is-fullwidth">
+                        {{ form.parroquia()}}
+                    </div>
+                </div>
+                
+                {% for error in form.parroquia.errors %}
+                    <p class="help is-size-4-touch is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="columns is-desktop">
+            <div class="field column">
+                <label class="label is-size-3-touch">{{ form.telefono.label }} (10 dígitos sin guiones ni espacios)</label>
+                <div class="control">
+                    {{ form.telefono(size=50)}}
+                </div>
+                
+                {% for error in form.telefono.errors %}
+                    <p class="help is-size-4-touch is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="field column">
+                <label class="label is-size-3-touch">{{ form.correo.label }} (No es obligatorio)</label>
+                <div class="control">
+                    {{ form.correo(size=50)}}
+                </div>
+                
+                {% for error in form.correo.errors %}
+                    <p class="help is-size-4-touch is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+       
+        
+    </form>
+</div>
+    <script>
+        let decanato_select = document.getElementById('decanato');
+        let grado_select = document.getElementById('grado');
+        let parroquia_select = document.getElementById('parroquia');
+        let parroquias = {
+            'Nuestra Señora de la Asunción' : [
+                ['asun', 'Nuestra Señora de la Asunción'],
+                ['pastora', 'Rec. Nuestra Señora de Dolores (La Pastora)'],
+                ['scbv', 'Santo Cristo del Buen Viaje'],
+                ['asun-scj', 'Sagrado Corazón de Jesús'],
+                ['stella', 'Stella Maris'],
+                ['asun-nsg', 'Sant. Nuestra Señora de Guadalupe'],
+                ['luz', 'Madre Santísima de la Luz'],
+                ['madre-de-dios', 'Madre de Dios'],
+                ['sta-rita', 'Santa Rita de Casia'],
+                ['calazans', 'San José de Calasanz']
+            ],
+            'Cristo Rey' : [
+                ['cristo-nsc', 'Cristo Rey y Nuestra Señora del Carmen'],
+                ['natividad', 'C. Par. La Natividad del Señor'],
+                ['epifania', 'C. Par. La Epifanía del Señor'],
+                ['san-rafael-guizar', 'San Rafael Guízar y Valencia'],
+                ['san-gabriel', 'San Gabriel Arcángel'],
+                ['vera-cruz', 'Santa Vera-Cruz'],
+                ['beato-dario', 'C. Par. Beato Ángel Darío Acosta Zurita'],
+                ['divina', 'La Divina Providencia'],
+                ['consuelo', 'Nuestra Señora del Consuelo'],
+                ['buen-pastor', 'Jesús Buen Pastor'],
+                ['socorro-s-fco', 'Nuestra Señora del Perpetuo Socorro y San Francisco de Asís']
+            ],
+            'San Felipe de Jesús' : [
+                ['sn-felipe', 'San Felipe de Jesús'],
+                ['merced', 'Nuestra Señora de la Merced'],
+                ['juquila', 'Nuestra Señora de Juquila'],
+                ['s-fco', 'San Francisco de Asís'],
+                ['s-jose', 'San José'],
+                ['sagrada-fam', 'La Sagrada Familia'],
+                ['esp-santo', 'El Espíritu Santo'],
+                ['s-judas', 'San Judas Tadeo'],
+                ['s-teresa', 'Santa Teresa de Ávila'],
+                ['ns-rosario', 'Nuestra Señora del Rosario'],
+                ['El Señor de la Divina Misericordia', 'El Señor de la Divina Misericordia'],
+            ],
+            'Santa Ana' : [
+                ['s-ana', 'Santa Ana'],
+                ['s-judas-t', 'San Judas Tadeo'],
+                ['ns-carmen', 'Nuestra Señora del Carmen'],
+                ['s-teresita', 'Santa Teresita del Niño Jesús'],
+                ['s-jose-o', 'San José Obrero'],
+                ['ns-lagos', 'Nuestra Señora de San Juan de los Lagos'],
+                ['inmaculada-c', 'Inmaculada Concepción y San Judas Tadeo'],
+                ['sp-sp', 'San Pedro y San Pablo'],
+                ['jesus-naz', 'Jesús de Nazareth'],
+                ['s-miguel', 'San Miguel Arcángel'],
+                ['s-charbel', 'San Chárbel']
+            ],
+            'San José' : [
+                ['s-jose-m', 'San José de la Montaña'],
+                ['carlos-borro', 'San Carlos Borromeo'],
+                ['s-fco-asis', 'San Francisco de Asís'],
+                ['jose-nsg', 'Nuestra Señora de Guadalupe, Cardel'],
+                ['ps-scbv', 'Par. Santuario Santo Cristo del Buen Viaje'],
+                ['s-miguel-a', 'San Miguel Arcángel'],
+                ['nssc', 'Nuestra Señora del Sagrado Corazón'],
+                ['s-nsg', 'Santuario Nuestra Señora de Guadalupe, Paso de Ovejas'],
+                ['jose-nsg2', 'Nuestra Señora de Guadalupe, Tamarindo']
+            ],
+            'Soledad' : [
+                ['ns-soledad', 'Nuestra Señora de la Soledad'],
+                ['s-juan-b', 'San Juan Bautista'],
+                ['sol-cristo', 'Cristo Rey'],
+                ['s-juan-d', 'Vicaría Fija: San Juan Diego'],
+                ['sol-s-miguel', 'San Miguel Arcángel'],
+                ['s-pedro', 'San Pedro Apóstol'],
+                ['sol-inmaculada', 'La Inmaculada Concepción'],
+                ['sjpII', 'Cuasi-Parroquia San Juan Pablo II'],
+                ['sfjpm', 'Vicaría Fija: San Felipe de Jesús, Protomártir Mexicano'],
+                ['sol-juquila', 'Nuestra Señora de Juquila']
+            ],
+            'Nuestra Señora del Rosario' : [
+                ['nsr', 'Nuestra Señora del Rosario'],
+                ['s-cruz', 'La Santa Cruz'],
+                ['pedro-andres', 'Santos Apóstoles Pedro y Andrés'],
+                ['sma', 'Santa María de la Asunción'],
+                ['ros-scj', 'Sagrado Corazón de Jesús'],
+                ['ros-inmaculada', 'La Inmaculada Concepción, Piedras Negras'],
+                ['ros-inmaculada1', 'Inmaculada Concepción, La Tinaja'],
+                ['s-pedroa', 'San Pedro Apóstol']
+            ],
+            'Guadalupe' : [
+                ['ssmg', 'Santuario Santa María de Guadalupe'],
+                ['gpe-s-carmen', 'Nuestra Señora del Carmen'],
+                ['transfiguracion', 'Vic. Fija la Transfiguración del Señor'],
+                ['cuerpo-sangre', 'Templo Expiatorio del Cuerpo y Sangre de Cristo'],
+                ['salvador', 'Divino Salvador'],
+                ['gpe-nsg', 'Nuestra Señora de Guadalupe'],
+                ['gpe-scj', 'Sagrado Corazón de Jesús'],
+                ['lucas', 'San Lucas Evangelista'],
+                ['gpe-cristo-rey', 'Cristo Rey'],
+                ['gpe-jose', 'San José']
+            ],
+            'Inmaculada' : [
+                ['martin', 'San Martín de Tours'],
+                ['isidro', 'San Isidro Labrador'],
+                ['ascension', 'La Ascensión del Señor y Santiago Apóstol'],
+                ['antonio', 'San Antonio de Padua y Santa Lucía'],
+                ['nsr-fatima', 'Nuestra Señora del Rosario de Fátima'],
+                ['cristobal', 'San Cristóbal'],
+                ['inm-s-pedro', 'San Pedro Apóstol y Nuestra Señora de Pentecostés']
+            ]
+        }
+
+        let populate_parroquias = function() {
+            let optionHTML = '';
+
+            for (let parr of parroquias[decanato_select.value]) {
+                optionHTML += '<option value="' + parr[1] + '">' + parr[1] + '</option>';
+            }
+
+            parroquia_select.innerHTML = optionHTML; 
+            
+            if (sessionStorage.getItem('parroquia') != null) {
+                parroquia_select.value = sessionStorage.getItem('parroquia');
+            } 
+        }
+
+        window.onload = populate_parroquias;
+        decanato_select.onchange = populate_parroquias;
+        parroquia_select.onchange = function() {
+            sessionStorage.setItem('parroquia', parroquia_select.value)
+        }
+
+    </script>
+{% endblock %}

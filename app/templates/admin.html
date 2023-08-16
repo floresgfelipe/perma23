@@ -1,0 +1,67 @@
+{% extends 'base-admin.html' %}
+
+{% block content %}
+
+<div>
+    <h1 class="title is-1">Alumnos</h1>
+    <hr>
+    <div id="table"></div>
+</div>
+<script>
+    new gridjs.Grid({
+      columns: [
+        { id: 'id', name: 'ID' },
+        { id: 'nombres', name: 'Nombre(s)' },
+        { id: 'apellido_p', name: 'Apellido Paterno' },
+        { id: 'apellido_m', name: 'Apellido Materno' },
+        { id: 'fecha_nac', name: 'Fecha de Nacimiento' },
+        { id: 'decanato', name: 'Decanato' },
+        { id: 'parroquia', name: 'Parroquia' },
+        { id: 'telefono', name: 'Teléfono', sort: false },
+        { id: 'correo', name: 'E-mail', sort: false },
+        { id: 'foto', name: 'Foto', sort: false },
+        { id: 'grado', name: 'Grado' },
+        { id: 'boleta_carta', name: 'Boleta/Carta', sort: false },
+        { id: 'servicio', name: 'Servicio Activo', sort: false },
+        { id: 'modalidad', name: 'Modalidad', sort: false },
+      ],
+      data: [
+        {% for alumno in alumnos %}
+          {
+            id: '{{ alumno.id }}',
+            nombres: '{{ alumno.nombres }}',
+            apellido_p: '{{ alumno.apellido_p }}',
+            apellido_m: '{{ alumno.apellido_m }}',
+            fecha_nac: "{{ alumno.dia_nac ~ '-' ~ alumno.mes_nac ~ '-' ~ alumno.año_nac }}",
+            decanato: '{{ alumno.decanato }}',
+            parroquia: '{{ alumno.parroquia }}',
+            telefono: '{{ alumno.telefono }}',
+            correo: '{{ alumno.correo }}',
+            {% if alumno.foto != 'none' %}
+            foto: gridjs.html("<a href={{ url_for('fotos_admin', filename=basename(alumno.foto)) }}>Foto</a>"),
+            {% else %}
+            foto: '',
+            {% endif %}
+            grado: "{{ alumno.grado }}",
+            {% if alumno.boleta_carta != 'none' %}
+            boleta_carta: gridjs.html("<a href={{ url_for('boletas_admin', filename=basename(alumno.boleta_carta)) }}>B/C</a>"),
+            {% else %}
+            boleta_carta: '',
+            {% endif %}
+            servicio: "{{ alumno.servicio }}",
+            modalidad: "{{ alumno.get_modalidad() }}",
+          },
+        {% endfor %}
+      ],
+      search: true,
+      sort: true,
+      pagination: {
+        enabled: true,
+        limit: 15,
+        buttonsCount: 15,
+      }
+    }).render(document.getElementById('table'));
+</script>
+
+
+{% endblock %}

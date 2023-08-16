@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        
+<div class="has-text-centered">
+        
+            <div class="columns is-desktop">
+
+                
+                <div class="column has-text-centered">
+                    <div class="box m-4">
+                        <a class="boton button is-large is-link mt-2 mb-4" href="{{ url_for('online') }}">
+                            Inscribirse al Curso Permanente en Línea
+                        </a>
+                        <p class="is-size-2">Curso modalidad virtual, las clases se imparten a través de la plataforma zoom.</p>
+                        <p class="is-size-2 mt-4">Grados Disponibles</p>
+                        <div class="container has-text-centered mt-2">
+                            <span class="tag is-large is-link is-light">Primero</span>
+                            <span class="tag is-large is-link is-light">Segundo</span>
+                            <span class="tag is-large is-link is-light">Tercero</span>
+                        </div>
+                        <p class="is-size-2 mt-4">Horario de clases</p>
+                        <div class="container has-text-centered mt-2">
+                            <span class="tag is-large is-link is-light">Lunes de 7 a 9 p.m.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column has-text-centered">
+                    <div class="box m-4">
+                        <a class="boton button is-large is-success mt-2 mb-4" href="{{ url_for('presencial') }}">
+                            Inscribirse al Curso Permanente Presencial
+                        </a>
+                        <p class="is-size-2">Curso en modalidad presencial, se impartirá en la <a href="https://goo.gl/maps/8Dqic5nnf71sAmF5A">Parroquia Jesús de Nazareth</a></p>
+                        <p class="is-size-3">Mar de Irlanda esq. Costa del Sol. Fracc. Costa Verde</p>
+                        <p class="is-size-2 mt-4">Grados Disponibles</p>
+                        <div class="container has-text-centered mt-2">
+                            <span class="tag is-large is-success is-light">Primero</span>
+                            <span class="tag is-large is-success is-light">Segundo</span>
+                            <span class="tag is-large is-success is-light">Tercero</span>
+                            <span class="tag is-large is-success is-light">Curso Especializado</span>
+                        </div>
+                        <p class="is-size-2 mt-4">Horario de clases</p>
+                        <div class="container has-text-centered mt-2">
+                            <span class="tag is-large is-success is-light">Lunes de 7 a 9 p.m.</span>
+                        </div>
+                    </div>
+                </div>
+
+               
+            
+            </div>
+            <a class="boton button is-large is-warning mt-2" href="{{ url_for('entrar') }}">
+                Entrar al Perfil del Catequista
+            </a>
+        
+</div>
+{% endblock %}

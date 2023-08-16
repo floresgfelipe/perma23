@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="columns is-desktop">
+    <div class="column"></div>
+    <div class="column">
+        <div class="box mt-4">
+            <div class="content is-size-3-touch">
+                <h1 class="has-text-centered">Instrucciones</h1>
+                <p>1. Da click o presiona sobre el botón titulado "Elige una foto.."</p>
+                <p>2. Te aparecerá un cuadro de diálogo donde podrás elegir el archivo correspondiente.
+                    Sólo se permite subir imágenes, no otro tipo de archivo.
+                </p>
+                <p>3. Para finalizar presiona el botón titulado "Subir Foto" y se te redireccionará a tu perfil de nueva cuenta.</p>
+            </div>
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div id="subir-foto" class="file has-name">
+                    <label class="file-label is-size-3-touch">
+                        {{ form.file() }}
+                        <span class="file-cta">
+                            <span class="file-label">
+                            Elige una foto..
+                            </span>
+                        </span>
+                        <span class="file-name">
+                            No has seleccionado ningún archivo
+                        </span>
+                    </label>
+                </div>
+
+                <div class="control mt-3">
+                    {{ form.submit() }}
+                </div>
+            </form>
+            {% for error in form.file.errors %}
+                <p class="help is-danger is-size-5 has-text-centered">{{ error }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="column">
+        
+    </div>
+</div>
+
+<script>
+    const fileInput = document.querySelector('#subir-foto input[type=file]');
+    fileInput.onchange = () => {
+      if (fileInput.files.length > 0) {
+        const fileName = document.querySelector('#subir-foto .file-name');
+        fileName.textContent = fileInput.files[0].name;
+      }
+    }
+</script>
+{% endblock %}

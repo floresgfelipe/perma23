@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="container is-fluid mt-4">
+            {% for message in messages %}
+                <div class="notification is-success is-size-4 is-size-2-touch has-text-centered">
+                    <button class="delete"></button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    {% if current_user.foto == 'none' %}
+        {% if current_user.boleta_carta == 'none' %}
+            {% if current_user.grado|int > 1 %}
+                <div class="container is-fluid mt-4">
+                    <div class="notification is-primary is-light is-size-4 is-size-2-touch has-text-centered">
+                        Favor de subir una foto tuya (Selfie) y una foto de tu boleta del curso anterior.
+                    </div>
+                </div>
+            {% else %}
+                <div class="container is-fluid mt-4">
+                    <div class="notification is-primary is-light is-size-4 is-size-2-touch has-text-centered">
+                        Favor de subir una foto tuya (Selfie).
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="container is-fluid mt-4">
+                <div class="notification is-primary is-light is-size-4 is-size-2-touch has-text-centered">
+                    Favor de subir una foto tuya (Selfie).
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        {% if current_user.boleta_carta == 'none' %}
+            {% if current_user.grado|int > 1 %}
+                <div class="container is-fluid mt-4">
+                    <div class="notification is-primary is-light is-size-4 is-size-2-touch has-text-centered">
+                        Favor de subir una foto de tu boleta del curso anterior.
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    
+    <div class="container is-fluid">
+        <div class="columns is-desktop mt-4">
+            <div class="column">
+                <div class="box notification is-info has-text-centered">
+                    <div class="columns is-mobile">
+                    <div class="column">
+                    {% if current_user.foto == 'none' %}
+                        <figure class="image is-1by1">
+                            <img src="{{ url_for('static', filename='anon.jpg') }}">
+                        </figure>
+                    {% else %}
+                        <figure class="image">
+                            <img src="{{ url_for('fotos', filename=basename(current_user.foto)) }}">
+                        </figure>
+                    {% endif %}
+                    </div>
+                    <div class="column">
+                    {% if current_user.foto == 'none' %}
+                        <div class="content mt-4">
+                            <a href="{{ url_for('subir_foto') }}" class="button is-danger is-normal is-size-2-touch">Subir Foto (Selfie)</a>
+                        </div>
+                    {% endif %}
+                    {% if current_user.boleta_carta == 'none' %}
+                        {% if current_user.grado|int > 1 %}
+                            <div class="content mt-4">
+                                <a href="{{ url_for('subir_boleta') }}" class="button is-danger is-normal is-size-2-touch">Subir Boleta del Curso Anterior</a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="box notification has-background-light">
+                    <p class="title">Nombre Completo</p>
+                    <div class="content is-size-2">{{ current_user.nombres }} {{ current_user.apellido_p }} {{ current_user.apellido_m }}</div>
+                    <p class="title">Fecha de Nacimiento</p>
+                    <div class="content is-size-2">{{ current_user.dia_nac }} / {{ current_user.mes_nac }} / {{ current_user.año_nac }}</div>
+                    <p class="title">Decanato</p>
+                    <div class="content is-size-2">{{ current_user.decanato }}</div>
+                    <p class="title">Parroquia</p>
+                    <div class="content is-size-2">{{ current_user.parroquia }}</div>
+                    {% if current_user.correo != '' %}
+                        <p class="title">Correo Electrónico</p>
+                        <div class="content is-size-2">{{ current_user.correo }}</div>
+                    {% endif %}
+                    <p class="title">Teléfono Celular</p>
+                    <div class="content is-size-2">{{ current_user.telefono }}</div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="box notification is-warning">
+                    <p class="title">Grado</p>
+                    <div class="content is-size-2">{{ current_user.get_grado() }}</div>
+                </div>
+                <div class="box notification is-success">
+                    <p class="title">Modalidad</p>
+                    <div class="content is-size-2">{{ current_user.get_modalidad() }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+                const $notification = $delete.parentNode;
+
+                $delete.addEventListener('click', () => {
+                    $notification.parentNode.removeChild($notification);
+                });
+            });
+        });
+    </script>
+    
+{% endblock %}
