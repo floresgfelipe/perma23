@@ -34,6 +34,14 @@ def validate_image(stream):
         return None
     return '.' + (format if format != 'jpeg' else 'jpg')
 
+DIOCESIS = ['Xalapa',
+            'Cordoba',
+            'Coatzacoalcos',
+            'Papantla',
+            'Orizaba',
+            'San_Andres',
+            'Tuxpan',
+            'Veracruz']
 
 @app.route('/')
 @app.route('/index')
@@ -273,4 +281,15 @@ def fotos_admin(filename):
 @login_required
 def boletas_admin(filename):
     return send_from_directory(app.config['UPLOAD_PATH_BOLETAS'], filename)
+
+@app.route('/provincial', methods=['GET', 'POST'])
+def provincial():
+    diocesis = request.args.get('diocesis')
+
+    if diocesis in DIOCESIS:
+        return render_template('provincial.html', diocesis=diocesis)
+    
+    return render_template('provincial.html')
+
+
 

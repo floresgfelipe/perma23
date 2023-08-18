@@ -312,6 +312,7 @@ class RegisterFormOnline(FlaskForm):
             (1, 'Primer Grado'), 
             (2, 'Segundo Grado'), 
             (3, 'Tercer Grado'),
+            (4, 'Curso Especializado')
         ],
         render_kw={'autocomplete':'off', 'class':'select'}
     )
