@@ -27,6 +27,7 @@ def upgrade():
     sa.Column('telefono', sa.String(length=10), nullable=False),
     sa.Column('servicio', sa.String(length=20), nullable=False),
     sa.Column('coordinador', sa.String(length=2), nullable=False),
+    sa.Column('diocesis', sa.String(length=15), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
