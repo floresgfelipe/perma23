@@ -65,15 +65,99 @@ p.error {
     display: flex;
 }
 
-
-
 .logo > img {
     max-width: 100%;
     margin-top:15%;
 }
 
+label {
+    font-size: 1.1em;
+    display:inline-block;
+    margin-top: 4px;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 8px 15px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#dio {
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #8ac5f6;
+    margin-top: 20px;
+    margin-bottom: 6px;
+    padding: 8px 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+#lugares {
+    color: rgb(255, 51, 0);
+}
+
+#tel {
+    margin-left: 10px;
+    font-size: .9em;
+    display: inline;
+}
+
+input[type=submit] {
+    width: 40%;
+    background-color: #4c72af;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: large;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #6390af;
+  }
+
 @media screen and (min-width: 768px) {
     .box {
         max-width: 70%;
+    }
+
+    .logo {
+        width: 18%;
+    }
+
+    .logo > img {
+        max-width: 100%;
+        margin-top: 5%;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    h3 {
+        font-size: 2em;
+    }
+
+    p {
+        font-size: 1.5em;
+    }
+
+    input[type=text], select {
+        width: 50%;
+    }
+
+    #dio {
+        width: 50%;
+    }
+
+    input[type=submit] {
+        width: 15%;
     }
 }

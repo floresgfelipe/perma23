@@ -13,7 +13,7 @@
             <div class="htext">
                 <div class="ctext">
                     <h1>Encuentro Provincial de Equipos de Catequesis</h1>
-                    <h3>17 y 18 de octubre de 2023</h2>
+                    <h3>17 y 18 de octubre de 2023</h3>
                 </div>
                 <div class="logo">
                     <img src="{{ url_for('static', filename='logo.jpg') }}">
@@ -26,17 +26,19 @@
             </div>
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
-                <div>
+                <div id="dio">
                     <label>{{ form.diocesis.label }}</label>
                     <div>
-                        <div>
                             {{ form.diocesis()}}
-                        </div>
                     </div>
                     
                     {% for error in form.diocesis.errors %}
                         <p class="error">{{ error }}</p>
                     {% endfor %}
+                </div>
+
+                <div>
+                    <p id="lugares">Hay {{ 15 - registrados }} lugares disponibles</p>
                 </div>
 
                 <div>
@@ -113,6 +115,7 @@
 
                 <div>
                     <label>{{ form.telefono.label }}</label>
+                    <p id="tel">(Sin espacios ni guiones)</p>
                     <div>
                         <div>
                             {{ form.telefono(size=50)}}
@@ -144,7 +147,7 @@
     {% else %}
 
             <div>
-                <p>Selecciona tu diócesis</p>
+                <p>Selecciona tu diócesis:</p>
 
                 <div class="buttons">
                     <a href="?diocesis=coatza" class="btn">Coatzacoalcos</a>

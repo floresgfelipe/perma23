@@ -314,7 +314,12 @@ def provincial():
             form.diocesis.label = "Diócesis: " + DIOCESIS[diocesis]
             form.diocesis.data = DIOCESIS[diocesis]
 
-            return render_template('provincial.html', diocesis=DIOCESIS[diocesis], form=form)
+            return render_template(
+                'provincial.html', 
+                diocesis=DIOCESIS[diocesis], 
+                registrados=registrados,
+                form=form
+            )
         
         return render_template('sincupo.html')
     
