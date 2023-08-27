@@ -4,11 +4,11 @@ from wtforms import (
     StringField, 
     SubmitField, 
     SelectField,
-    TextAreaField,
-    PasswordField,
+    HiddenField,
 )
 from wtforms.validators import (
     DataRequired,
+    InputRequired,
     Length,
     EqualTo,
     Regexp,
@@ -359,3 +359,75 @@ class UploadForm(FlaskForm):
     )
     submit = SubmitField('Subir Foto', render_kw={'class':'button is-link is-large is-size-2-touch'})
 
+
+class RegisterParticipanteForm(FlaskForm):
+    diocesis = HiddenField( 
+        validators=[InputRequired()]
+    )
+
+    nombres = StringField('Nombre(s)', validators=[
+        InputRequired(message='Este campo es obligatorio'), 
+        Length(min=1, max=50, 
+            message='El largo del nombre debe ser entre 1 y 50 caracteres')
+        ],
+        render_kw={}
+    )
+
+    apellido_p = StringField('Apellido Paterno', validators=[
+        InputRequired(message='Este campo es obligatorio'), 
+        Length(min=1, max=50,
+             message='El largo del apellido debe ser entre 1 y 50 caracteres')
+        ],
+        render_kw={}
+    )
+
+    apellido_m = StringField('Apellido Materno', validators=[
+        InputRequired(message='Este campo es obligatorio'), 
+        Length(min=1, max=50,
+             message='El largo del apellido debe ser entre 1 y 50 caracteres')
+        ],
+        render_kw={}
+    )
+
+    sexo = SelectField('Sexo', choices=['', 'Hombre', 'Mujer'],
+        validators=[InputRequired(message='Este campo es obligatorio')],
+        default=''
+    )
+
+    telefono = StringField('Número de celular', validators=[
+        InputRequired(message='Este campo es obligatorio'),
+        EqualTo('confirma_telefono', 
+                message='Los dos números de celular deben ser iguales'),
+        Regexp('^\d{10}$', message='El número debe tener 10 dígitos sin espacios ni guiones')
+        ],
+        render_kw={}
+    )
+
+    confirma_telefono = StringField('Confirma el número de celular', validators=[
+        InputRequired(message='Este campo es obligatorio'),
+        ],
+        render_kw={}
+    )
+
+    servicio = SelectField('Apostolado', choices=[
+        '', 
+        'Presbítero', 
+        'Diácono',
+        'Religiosa',
+        'Laico'
+        ],
+        validators=[InputRequired(message='Este campo es obligatorio')],
+        default=''
+    )
+
+    coordinador = SelectField(
+        '¿Eres coordinador de equipo diocesano?', 
+        choices=['', 'Si', 'No'],
+        validators=[InputRequired(message='Este campo es obligatorio')],
+        default=''
+    )
+
+    submit = SubmitField(
+        'Enviar', 
+        render_kw={}
+    )

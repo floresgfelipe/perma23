@@ -57,6 +57,7 @@ class Participante(db.Model):
     telefono = db.Column(db.String(10), nullable=False)
     servicio = db.Column(db.String(20), nullable= False)
     coordinador = db.Column(db.String(2), nullable=False)
+    diocesis = db.Column(db.String(15), nullable=False, default='')
     
 
 

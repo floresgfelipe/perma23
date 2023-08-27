@@ -15,12 +15,13 @@ from flask import (
     send_from_directory
 )
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import Alumno
+from app.models import Alumno, Participante
 from app.forms import (
     LoginForm,
     RegisterForm, 
     RegisterFormOnline, 
     UploadForm, 
+    RegisterParticipanteForm,
 )
 from werkzeug.utils import secure_filename
 from PIL import Image, ImageOps
@@ -34,14 +35,14 @@ def validate_image(stream):
         return None
     return '.' + (format if format != 'jpeg' else 'jpg')
 
-DIOCESIS = ['Xalapa',
-            'Cordoba',
-            'Coatzacoalcos',
-            'Papantla',
-            'Orizaba',
-            'San_Andres',
-            'Tuxpan',
-            'Veracruz']
+DIOCESIS = {'xalapa': 'Xalapa',
+            'cordoba': 'Córdoba',
+            'coatza': 'Coatzacoalcos',
+            'papantla': 'Papantla',
+            'orizaba': 'Orizaba',
+            'sanandres': 'San Andrés',
+            'tuxpan': 'Tuxpan',
+            'veracruz': 'Veracruz'}
 
 @app.route('/')
 @app.route('/index')
@@ -257,8 +258,6 @@ def subir_boleta():
 def boletas(filename):
     return send_from_directory(app.config['UPLOAD_PATH_BOLETAS'], filename)
 
-
-    
 @app.route('/admin')
 @login_required
 def admin():
@@ -284,10 +283,40 @@ def boletas_admin(filename):
 
 @app.route('/provincial', methods=['GET', 'POST'])
 def provincial():
+    form = RegisterParticipanteForm()
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            participante = Participante(
+                nombres=form.nombres.data.strip(),
+                apellido_p=form.apellido_p.data.strip(),
+                apellido_m=form.apellido_m.data.strip(),
+                sexo=form.sexo.data,
+                telefono=form.telefono.data,
+                servicio=form.servicio.data,
+                coordinador=form.coordinador.data,
+                diocesis=form.diocesis.data
+            )
+
+            db.session.add(participante)
+            db.session.commit()
+
+            return render_template('registrado.html', participante=participante)
+
     diocesis = request.args.get('diocesis')
 
     if diocesis in DIOCESIS:
-        return render_template('provincial.html', diocesis=diocesis)
+        registrados = Participante.query.filter_by(
+            diocesis=DIOCESIS[diocesis]
+            ).count()
+        
+        if registrados < 15:
+            form.diocesis.label = "Diócesis: " + DIOCESIS[diocesis]
+            form.diocesis.data = DIOCESIS[diocesis]
+
+            return render_template('provincial.html', diocesis=DIOCESIS[diocesis], form=form)
+        
+        return render_template('sincupo.html')
     
     return render_template('provincial.html')
 

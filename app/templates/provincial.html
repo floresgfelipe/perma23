@@ -1,5 +1,163 @@
-{% if diocesis %}
-    {{ diocesis }}
-{% else %}
-    <h1>Bienvenido</h1>
-{% endif %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='provincial.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Registro para el Encuentro de Equipos Diocesanos 2023</title>
+    </head>
+    <body>
+
+        <div class="box">
+            <div class="htext">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='logo.jpg') }}">
+                </div>
+                <div>
+                    <h1>Encuentro Provincial de Equipos de Catequesis</h1>
+                    <h2>17 y 18 de octubre de 2023</h2>
+                </div>
+            </div>
+
+    {% if diocesis %}
+            <div>
+                <a href="{{ url_for('provincial') }}">Volver al Inicio</a>
+            </div>
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div>
+                    <label>{{ form.diocesis.label }}</label>
+                    <div>
+                        <div>
+                            {{ form.diocesis()}}
+                        </div>
+                    </div>
+                    
+                    {% for error in form.diocesis.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label>{{ form.nombres.label }}</label>
+                    <div>
+                        {{ form.nombres(size=50)}}
+                    </div>
+
+                    {% for error in form.nombres.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label>{{ form.apellido_p.label }}</label>
+                    <div>
+                        {{ form.apellido_p(size=50)}}
+                    </div>
+
+                    {% for error in form.apellido_p.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label>{{ form.apellido_m.label }}</label>
+                    <div>
+                        {{ form.apellido_m(size=50)}}
+                    </div>
+
+                    {% for error in form.apellido_m.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label>{{ form.sexo.label }}</label>
+                    <div>
+                        <div>
+                            {{ form.sexo()}}
+                        </div>
+                    </div>
+                    
+                    {% for error in form.sexo.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label>{{ form.servicio.label }}</label>
+                    <div>
+                        <div>
+                            {{ form.servicio()}}
+                        </div>
+                    </div>
+                    
+                    {% for error in form.servicio.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label>{{ form.coordinador.label }}</label>
+                    <div>
+                        <div>
+                            {{ form.coordinador()}}
+                        </div>
+                    </div>
+                    
+                    {% for error in form.coordinador.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label>{{ form.telefono.label }}</label>
+                    <div>
+                        <div>
+                            {{ form.telefono(size=50)}}
+                        </div>
+                    </div>
+                    
+                    {% for error in form.telefono.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label>{{ form.confirma_telefono.label }}</label>
+                    <div>
+                        <div>
+                            {{ form.confirma_telefono(size=50)}}
+                        </div>
+                    </div>
+                    
+                    {% for error in form.confirma_telefono.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    {{ form.submit() }}
+                </div>
+            </form>
+    {% else %}
+
+            <div>
+                <p>Selecciona tu diócesis</p>
+
+                <div class="buttons">
+                    <a href="?diocesis=coatza" class="btn">Coatzacoalcos</a>
+                    <a href="?diocesis=cordoba" class="btn">Córdoba</a>
+                    <a href="?diocesis=orizaba" class="btn">Orizaba</a>
+                    <a href="?diocesis=papantla" class="btn">Papantla</a>
+                    <a href="?diocesis=sanandres" class="btn">San Ándres</a>
+                    <a href="?diocesis=tuxpan" class="btn">Tuxpan</a>
+                    <a href="?diocesis=veracruz" class="btn">Veracruz</a>
+                    <a href="?diocesis=xalapa" class="btn">Xalapa</a>
+                </div>  
+            </div>
+    {% endif %}
+        </div>
+    </body>
+
