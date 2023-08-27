@@ -16,11 +16,10 @@ p.error {
 }
 
 .btn {
-    display: inline-block;
     align-self: start;
     outline: none;
     cursor: pointer;
-    font-size: 4em;
+    font-size: 2.5em;
     line-height: 1;
     border-radius: 500px;
     transition-property: background-color,border-color,color,box-shadow,filter;
@@ -61,20 +60,16 @@ p.error {
     justify-content: center;
 }
 
-h1 {
-    font-size: 3em;
-}
 
 .htext {
     display: flex;
 }
 
-.logo {
-    width: 25%;
-}
+
 
 .logo > img {
     max-width: 100%;
+    margin-top:15%;
 }
 
 @media screen and (min-width: 768px) {
