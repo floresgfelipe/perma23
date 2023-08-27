@@ -117,11 +117,39 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
     font-size: large;
-  }
+}
   
-  input[type=submit]:hover {
+input[type=submit]:hover {
     background-color: #6390af;
-  }
+}
+
+.feliz {
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #6df183;
+    margin-top: 20px;
+    margin-bottom: 6px;
+    padding: 8px 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.sincupo {
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #ff6d6d;
+    margin-top: 20px;
+    margin-bottom: 6px;
+    padding: 8px 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.feliz > h2 {
+    letter-spacing: 0.05em;
+}
+
+
 
 @media screen and (min-width: 768px) {
     .box {
