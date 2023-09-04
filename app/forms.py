@@ -409,6 +409,8 @@ class RegisterParticipanteForm(FlaskForm):
         render_kw={}
     )
 
+    correo = StringField('Correo Electrónico')
+
     servicio = SelectField('Apostolado', choices=[
         '', 
         'Presbítero', 

@@ -295,7 +295,8 @@ def provincial():
                 telefono=form.telefono.data,
                 servicio=form.servicio.data,
                 coordinador=form.coordinador.data,
-                diocesis=form.diocesis.data
+                diocesis=form.diocesis.data,
+                correo=form.correo.data
             )
 
             db.session.add(participante)

@@ -141,6 +141,19 @@
                 </div>
 
                 <div>
+                    <label>{{ form.correo.label }}</label>
+                    <div>
+                        <div>
+                            {{ form.correo(size=50)}}
+                        </div>
+                    </div>
+                    
+                    {% for error in form.correo.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
                     {{ form.submit() }}
                 </div>
             </form>

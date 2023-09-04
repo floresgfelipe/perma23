@@ -58,6 +58,7 @@ class Participante(db.Model):
     servicio = db.Column(db.String(20), nullable= False)
     coordinador = db.Column(db.String(2), nullable=False)
     diocesis = db.Column(db.String(15), nullable=False, default='')
+    correo = db.Column(db.String(50))
     
 
 
