@@ -1,6 +1,6 @@
 import os
 from app import app, db
-from app.models import Alumno
+from app.models import Alumno, Participante
 
 import pandas as pd
 
@@ -59,6 +59,50 @@ def split_primero():
 
         c += 1
 """
+
+DIOCESIS = ['Coatzacoalcos', 'Córdoba', 'Orizaba', 'Papantla',
+            'San Andrés', 'Tuxpan', 'Veracruz', 'Xalapa']
+
+def participante_to_dict(participante):
+    r = dict()
+
+    r['Nombre'] = (str(participante.nombres) 
+                         + ' ' + str(participante.apellido_p) 
+                         + ' ' + str(participante.apellido_m))
+
+    r['Diócesis'] = participante.diocesis
+
+    r['Apostolado'] = str(participante.servicio)
+
+    r['Teléfono'] = str(participante.telefono)
+    
+    r['Sexo'] = str(participante.sexo)
+
+    r['¿Es Coordinador?'] = str(participante.coordinador)
+
+
+    r['Correo'] = participante.correo
+
+    return r
+
+def participantes_to_excel():
+    filename = os.path.join(app.config['EXCEL_PATH'], 'provincial.xlsx')
+    writer = pd.ExcelWriter(filename)
+    
+    participantes = Participante.query
+
+    lista_p = [participante_to_dict(participante) for participante in participantes]
+    df = pd.DataFrame(lista_p)
+    df.to_excel(writer, sheet_name='General', index=False)
+
+    for diocesis in DIOCESIS:
+        participantes = Participante.query.filter_by(diocesis=diocesis)
+        lista_p = [participante_to_dict(participante) for participante in participantes]
+        df = pd.DataFrame(lista_p)
+        df.to_excel(writer, sheet_name=diocesis, index=False)
+
+    writer.close()
+
 
 def enlinea_to_excel():
     alumnos = Alumno.query.filter_by(modalidad=0)
