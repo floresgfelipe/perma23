@@ -38,7 +38,11 @@
                 </div>
 
                 <div>
-                    <p id="lugares">Hay {{ 15 - registrados }} lugares disponibles</p>
+                    {% if diocesis == 'Veracruz' %}
+                        <p id="lugares">Hay {{ 25 - registrados }} lugares disponibles</p>
+                    {% else %}
+                        <p id="lugares">Hay {{ 15 - registrados }} lugares disponibles</p>
+                    {% endif %}
                 </div>
 
                 <div>

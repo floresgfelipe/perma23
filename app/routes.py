@@ -311,7 +311,17 @@ def provincial():
             diocesis=DIOCESIS[diocesis]
             ).count()
         
-        if registrados < 15:
+        if diocesis == 'veracruz' and registrados < 25:
+            form.diocesis.label = "Diócesis: Veracruz"
+            form.diocesis.data = "Veracruz"
+
+            return render_template(
+                'provincial.html', 
+                diocesis="Veracruz", 
+                registrados=registrados,
+                form=form
+            )
+        elif registrados < 15:
             form.diocesis.label = "Diócesis: " + DIOCESIS[diocesis]
             form.diocesis.data = DIOCESIS[diocesis]
 
