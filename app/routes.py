@@ -86,7 +86,7 @@ def entrar():
 
 @app.route('/online', methods=['GET', 'POST'])
 def online():
-    """ if current_user.is_authenticated:
+    if current_user.is_authenticated:
         return redirect(url_for('perfil'))
 
     form = RegisterFormOnline()
@@ -116,16 +116,17 @@ def online():
         session['account_type'] = 'Alumno'
         flash('¡Felicidades! Te has inscrito en el Curso Permanente de la \
                Escuela Diocesana de Catequesis')
-        return redirect(url_for('perfil'))  """
+        return redirect(url_for('perfil'))  
+    
     return render_template(
-        'terminado.html',
-        title='Registro al Curso Permanente'
+        'online.html',
+        title='Registro al Curso Permanente',
+        form=form
     )
-
 
 @app.route('/presencial', methods=['GET', 'POST'])
 def presencial():
-    """if current_user.is_authenticated:
+    if current_user.is_authenticated:
         return redirect(url_for('perfil'))
 
     form = RegisterForm()
@@ -155,11 +156,12 @@ def presencial():
         session['account_type'] = 'Alumno'
         flash('¡Felicidades! Te has inscrito en el Curso Permanente de la \
                Escuela Diocesana de Catequesis')
-        return redirect(url_for('perfil'))  """
+        return redirect(url_for('perfil'))  
     
     return render_template(
-        'terminado.html',
-        title='Registro al Curso Permanente'
+        'presencial.html',
+        title='Registro al Curso Permanente',
+        form=form
     )
 
 @app.route('/perfil')
