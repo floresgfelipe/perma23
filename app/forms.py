@@ -310,7 +310,7 @@ class RegisterFormOnline(FlaskForm):
         choices=[
             ('', ''),
             (1, 'Primer Grado'), 
-            (2, 'Segundo Grado'), 
+            #(2, 'Segundo Grado'), 
             (3, 'Tercer Grado'),
             (4, 'Curso Especializado')
         ],
