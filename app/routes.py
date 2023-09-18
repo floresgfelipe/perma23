@@ -86,7 +86,7 @@ def entrar():
 
 @app.route('/online', methods=['GET', 'POST'])
 def online():
-    if current_user.is_authenticated:
+    """if current_user.is_authenticated:
         return redirect(url_for('perfil'))
 
     form = RegisterFormOnline()
@@ -122,11 +122,16 @@ def online():
         'online.html',
         title='Registro al Curso Permanente',
         form=form
+    )"""
+
+    return render_template(
+        'final.html',
+        title='Registro al Curso Permanente'
     )
 
 @app.route('/presencial', methods=['GET', 'POST'])
 def presencial():
-    if current_user.is_authenticated:
+    """if current_user.is_authenticated:
         return redirect(url_for('perfil'))
 
     form = RegisterForm()
@@ -162,6 +167,11 @@ def presencial():
         'presencial.html',
         title='Registro al Curso Permanente',
         form=form
+    )"""
+
+    return render_template(
+        'final.html',
+        title='Registro al Curso Permanente'
     )
 
 @app.route('/perfil')
