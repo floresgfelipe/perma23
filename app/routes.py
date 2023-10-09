@@ -293,6 +293,7 @@ def boletas_admin(filename):
 
 @app.route('/provincial', methods=['GET', 'POST'])
 def provincial():
+    """
     form = RegisterParticipanteForm()
 
     if request.method == 'POST':
@@ -342,9 +343,9 @@ def provincial():
                 form=form
             )
         
-        return render_template('sincupo.html')
+        return render_template('sincupo.html')"""
     
-    return render_template('provincial.html')
+    return render_template('fin_registro.html')
 
 
 
